@@ -17,6 +17,17 @@ public class UsuarioDao {
     @PersistenceContext(unitName = "pu-safechat")
     private EntityManager em;
     
+    public Usuario buscarPorUsername(String username){
+        TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.username=:username",Usuario.class);
+        query.setParameter("username", username);
+        Optional<Usuario> user = query.getResultList().stream().findFirst();
+        if(user.isPresent()){
+            return user.get();
+        }else{
+            return null;
+        }
+    }
+    
     public void salvar(Usuario novo){
         em.persist(novo);
     }

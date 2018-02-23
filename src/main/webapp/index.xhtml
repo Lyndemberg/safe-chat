@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <h:head>
         <!--Import Google Icon Font-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link href="css/material-icons.css" rel="stylesheet"/>
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
@@ -24,28 +25,30 @@
                         </center>
                     </div>
                     
-                    <form class="col s12" method="post">
+                    <h:form class="col s12">
                         <div class='row'>
                             <div class='input-field'>
-                                <input class='validate' type='email' name='email' id='email' />
+                                <input class='validate' jsf:value="#{controladorUsuario.usuario.email}" 
+                                       type='email' name='email' id='email' />
                                 <label for='email'>Email</label>
                             </div>
                         </div>
                         <div class='row'>
                             <div class='input-field'>
-                                <input class='validate' type='password' name='senha' id='senha' />
+                                <input class='validate' jsf:value="#{controladorUsuario.usuario.senha}" 
+                                       type='password' name='senha' id='senha' />
                                 <label for='senha'>Senha</label>
                             </div>
                         </div>
-                        <br />
+                        <h:messages class="red-text" />
                         <center>
-                            <h:message for="email" />
                             <div class='row'>
-                              <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                                <h:commandButton class="col s12 btn btn-large waves-effect indigo"
+                                                 value="Login" action="#{controladorUsuario.logar()}"/>
                             </div>
                             Não tem cadastro?<a href="cadastro.xhtml"> Clique aqui</a>
                         </center>
-                    </form>
+                    </h:form>
                 </div>
             </div>
             
@@ -53,7 +56,7 @@
         
         
         <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </h:body>
 </html>

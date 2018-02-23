@@ -1,6 +1,7 @@
 
 package com.ifpb.seguranca.safechat.model;
 
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -61,6 +62,9 @@ public class Usuario implements Serializable{
         return "Usuario{" + "username=" + username + ", email=" + email + ", senha=" + senha + ", foto=" + foto + '}';
     }
     
+    public String fotoBase64(){
+        return Base64.encode(foto);
+    }
     
     
     

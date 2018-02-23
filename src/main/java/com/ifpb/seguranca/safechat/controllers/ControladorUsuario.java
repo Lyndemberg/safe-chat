@@ -25,7 +25,7 @@ import javax.servlet.http.Part;
  */
 @Named
 @RequestScoped
-public class ControladorUsuario{
+public class ControladorUsuario implements Serializable{
     private Part foto;
     private Usuario usuario = new Usuario();
     @EJB
@@ -60,7 +60,7 @@ public class ControladorUsuario{
             }else{
                 HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
                 sessao.setAttribute("usuario", u);
-                return "home.xhtml";
+                return "home.xhtml?faces-redirect=true";
             }
         }
     }
@@ -90,5 +90,6 @@ public class ControladorUsuario{
         mensagem.setSeverity(FacesMessage.SEVERITY_INFO);
         FacesContext.getCurrentInstance().addMessage(titulo, mensagem);
     }
+
     
 }
