@@ -1,4 +1,10 @@
-/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/com/ifpb/seguranca/safechat/model/Usuario.java
-/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/com/ifpb/seguranca/safechat/dao/UsuarioDao.java
-/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/com/ifpb/seguranca/safechat/controllers/ControladorUsuario.java
-/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/com/ifpb/seguranca/safechat/controllers/ControladorBusca.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/controllers/ControladorUsuario.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/model/Usuario.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/util/MongoPrivate.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/dao/MensagemDao.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/conversors/LocalDateTimeToStamp.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/util/CryptoSafeChat.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/dao/UsuarioDao.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/model/Mensagem.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/controllers/ControladorConversas.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/controllers/ControladorMensagem.java

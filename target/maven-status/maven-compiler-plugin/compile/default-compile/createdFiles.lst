@@ -1,5 +1,12 @@
-com/ifpb/seguranca/safechat/model/Usuario_.class
-com/ifpb/seguranca/safechat/controllers/ControladorBusca.class
-com/ifpb/seguranca/safechat/model/Usuario.class
-com/ifpb/seguranca/safechat/controllers/ControladorUsuario.class
-com/ifpb/seguranca/safechat/dao/UsuarioDao.class
+model/Usuario.class
+model/Mensagem_.class
+util/CryptoSafeChat.class
+model/Mensagem.class
+conversors/LocalDateTimeToStamp.class
+dao/MensagemDao.class
+controllers/ControladorConversas.class
+controllers/ControladorUsuario.class
+model/Usuario_.class
+dao/UsuarioDao.class
+util/MongoPrivate.class
+controllers/ControladorMensagem.class

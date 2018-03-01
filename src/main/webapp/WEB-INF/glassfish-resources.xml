@@ -6,10 +6,9 @@
     <property name="driverClass" value="org.postgresql.Driver"/>
     <property name="User" value="postgres"/>
     <property name="Password" value="pgadmin"/>
-    
-    
   </jdbc-connection-pool>
   <jdbc-resource enabled="true" jndi-name="java:app/jdbc/safe-chat" 
                  object-type="user" pool-name="PoolSafeChat">
   </jdbc-resource>
+
 </resources>

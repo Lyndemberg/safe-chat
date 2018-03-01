@@ -5,7 +5,23 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition template="/template.xhtml">
         <ui:define name="corpo">
-            conversas aqui
+            <div class="row">
+                <ul class="collection">
+                    <h:dataTable value="#{controladorConversas.getMensagensDescrip()}" var="mensagem">
+                        <h:column>
+                            <li class="collection-item avatar">
+                            <h:graphicImage value="data:image/jpeg;base64,#{mensagem.remetente.fotoBase64()}" class="circle"/>
+                            <span class="title" style="font-weight: bold">#{mensagem.remetente.username}</span>
+                            <p>#{mensagem.corpoPlano}</p>
+                            <a href="conversa.xhtml" class="secondary-content waves-effect">>
+                                <i class="medium material-icons indigo-text">navigate_next</i>
+                            </a>
+                        </li>
+                        </h:column>
+                        
+                    </h:dataTable>
+                </ul>
+            </div>
         </ui:define>
     </ui:composition>
 </html>

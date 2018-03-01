@@ -3,20 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <ui:composition template="/template.xhtml">
         <ui:define name="corpo">
+            
             <div class="row">
                 <br/>
                 <h:form>
                     <div class="input-field col s9 l11">
                         <i class="material-icons prefix">account_circle</i>
-                        <h:inputText id="icon_prefix" value="#{controladorBusca.usuario.username}"/>
+                        <h:inputText id="icon_prefix" value="#{controladorMensagem.destino.username}"/>
                         <label for="icon_prefix">Username</label>
                     </div>
                     <div class="col s3 l1">
-                        <h:commandLink action="#{controladorBusca.buscar()}"
+                        <h:commandLink action="#{controladorMensagem.buscar()}"
                                        class="btn-floating btn-large waves-effect waves-light red">
                             <i class="medium material-icons">search</i>
                         </h:commandLink>
@@ -24,13 +24,17 @@
                 </h:form>
             </div>
             <div class="row">
-                <ul class="collection" jsf:rendered="#{controladorBusca.verResult != false}">
-                    <li class="collection-item avatar">
-                        <h:graphicImage height="400px" value="data:image/jpeg;base64,#{controladorBusca.usuario.fotoBase64()}" class="circle"/>
-                        <span class="title" style="font-weight: bold">#{controladorBusca.usuario.username}</span>
-                        <a jsf:action="" class="secondary-content waves-effect"><i class="medium material-icons indigo-text">navigate_next</i></a>
-                    </li>
-                </ul>
+                
+            <ul class="collection" jsf:rendered="#{controladorMensagem.verResult != false}">
+                <li class="collection-item avatar">
+                    <h:graphicImage value="data:image/jpeg;base64,#{controladorMensagem.destino.fotoBase64()}" class="circle"/>
+                    <span class="title" style="font-weight: bold">#{controladorMensagem.destino.username}</span>
+                    <a href="conversa.xhtml" class="secondary-content waves-effect">>
+                        <i class="medium material-icons indigo-text">navigate_next</i>
+                    </a>
+                </li>
+            </ul>
+                
             </div>
         </ui:define>
     </ui:composition>
