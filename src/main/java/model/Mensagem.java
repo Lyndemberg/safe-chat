@@ -3,7 +3,8 @@ package model;
 import conversors.LocalDateTimeToStamp;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.CascadeType;
+import java.time.format.DateTimeFormatter;
+import javax.persistence.Basic;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,31 +23,30 @@ public class Mensagem implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    @OneToOne
-    private Usuario remetente;
-    @ManyToOne
-    @JoinColumn(name="destino_id")
-    private Usuario destino;
     @Convert(converter = LocalDateTimeToStamp.class)
     private LocalDateTime hora;
     @Lob
-    private byte[] corpo;
+    private byte[] corpoRemetente;
+    @Lob
+    private byte[] corpoDestino;
     @Transient
     private String corpoPlano;
-    
+    @OneToOne
+    private Usuario remetente;
+    @OneToOne
+    private Usuario destino;
     public Mensagem() {
         
     }
 
-    public Mensagem(Usuario remetente, Usuario destino, LocalDateTime hora, byte[] corpo) {
+    public Mensagem(LocalDateTime hora, byte[] corpoRemetente, byte[] corpoDestino, Usuario remetente, Usuario destino) {
+        this.hora = hora;
+        this.corpoRemetente = corpoRemetente;
+        this.corpoDestino = corpoDestino;
         this.remetente = remetente;
         this.destino = destino;
-        this.hora = hora;
-        this.corpo = corpo;
     }
 
-    
-    
 
     public int getId() {
         return id;
@@ -54,14 +54,6 @@ public class Mensagem implements Serializable{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Usuario getRemetente() {
-        return remetente;
-    }
-
-    public void setRemetente(Usuario remetente) {
-        this.remetente = remetente;
     }
 
     public LocalDateTime getHora() {
@@ -72,12 +64,36 @@ public class Mensagem implements Serializable{
         this.hora = hora;
     }
 
-    public byte[] getCorpo() {
-        return corpo;
+    public byte[] getCorpoRemetente() {
+        return corpoRemetente;
     }
 
-    public void setCorpo(byte[] corpo) {
-        this.corpo = corpo;
+    public void setCorpoRemetente(byte[] corpoRemetente) {
+        this.corpoRemetente = corpoRemetente;
+    }
+
+    public byte[] getCorpoDestino() {
+        return corpoDestino;
+    }
+
+    public void setCorpoDestino(byte[] corpoDestino) {
+        this.corpoDestino = corpoDestino;
+    }
+
+    public String getCorpoPlano() {
+        return corpoPlano;
+    }
+
+    public void setCorpoPlano(String corpoPlano) {
+        this.corpoPlano = corpoPlano;
+    }
+
+    public Usuario getRemetente() {
+        return remetente;
+    }
+
+    public void setRemetente(Usuario remetente) {
+        this.remetente = remetente;
     }
 
     public Usuario getDestino() {
@@ -88,17 +104,9 @@ public class Mensagem implements Serializable{
         this.destino = destino;
     }
 
-    public String getCorpoPlano() {
-        return corpoPlano;
+    public String horaFormatada(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        return hora.format(formatter);
     }
-
-    public void setCorpoPlano(String corpoPlano) {
-        this.corpoPlano = corpoPlano;
-    }
-    
-    
-    
-    
-    
     
 }

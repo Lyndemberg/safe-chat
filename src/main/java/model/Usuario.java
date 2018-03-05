@@ -26,38 +26,37 @@ public class Usuario implements Serializable{
     @Id
     @GeneratedValue
     private int id;
+    
     @Column(unique = true)
     private String username;
+    
     @Column(unique = true)
     private String email;
     private String senha;
+    
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] foto;
+    
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private PublicKey chavePublica;
+    
     @Transient
     private PrivateKey chavePrivada;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destino")
-    private List<Mensagem> mensagens;
-
+    
     public Usuario() {
-        mensagens = new ArrayList<>();
     }
 
-    public void enviarMsg(Mensagem nova){
-        mensagens.add(nova);
-    }
     
     public Usuario(String username, String email, String senha, byte[] foto) {
-        mensagens = new ArrayList<>();
         this.username = username;
         this.email = email;
         this.senha = senha;
         this.foto = foto;
     }
 
+    
     public String getUsername() {
         return username;
     }
@@ -115,15 +114,13 @@ public class Usuario implements Serializable{
         this.chavePrivada = chavePrivada;
     }
 
-    public List<Mensagem> getMensagens() {
-        return mensagens;
+    public int getId() {
+        return id;
     }
 
-    public void setMensagens(List<Mensagem> mensagens) {
-        this.mensagens = mensagens;
+    public void setId(int id) {
+        this.id = id;
     }
-
-   
 
     
     

@@ -21,15 +21,29 @@
                 <a href="#!" class="brand-logo center">Safe Chat</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="busca.xhtml">Busca</a></li>
-                    <li><a href="conversas.xhtml">Conversas</a></li>
+                    <li><a href="busca.xhtml"><i class="material-icons left">search</i>Busca</a></li>
+                    <li><a href="conversas.xhtml"><i class="material-icons left">chat</i>Conversas</a></li>
+                    <li>
+                        <h:form>
+                            <h:commandLink action="#{controladorUsuario.logout()}">
+                            <i class="material-icons left">exit_to_app</i> Sair
+                            </h:commandLink>
+                        </h:form>
+                    </li>
                 </ul>
               </div>
             </nav>
         </div>    
         <ul class="side-nav" id="mobile-demo">
-            <li><a href="busca.xhtml">Busca</a></li>
-            <li><a href="conversas.xhtml">Conversas</a></li>
+            <li><a href="busca.xhtml"><i class="material-icons left">search</i>Busca</a></li>
+            <li><a href="conversas.xhtml"><i class="material-icons left">chat</i>Conversas</a></li>
+            <li>
+                <h:form>
+                    <h:commandLink action="#{controladorUsuario.logout()}">
+                    <i class="material-icons left">exit_to_app</i> Sair
+                    </h:commandLink>
+                </h:form>
+            </li>
         </ul>
         <div class="container">
             <ui:insert name="corpo">

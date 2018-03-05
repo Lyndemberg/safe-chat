@@ -23,23 +23,23 @@
                     <h:form enctype="multipart/form-data">
                         <div class="input-field">
                             <i class="material-icons prefix">person_pin</i>
-                            <h:inputText id="username" value="#{controladorUsuario.usuario.username}" required="true"/>
+                            <h:inputText id="username" value="#{controladorCadastro.usuario.username}" required="true"/>
                             <label for="username">Username</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">email</i>
-                            <h:inputText id="email" value="#{controladorUsuario.usuario.email}" required="true"/>
+                            <h:inputText id="email" value="#{controladorCadastro.usuario.email}" required="true"/>
                             <label for="email">Email</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">lock</i>
-                            <h:inputSecret id="senha" value="#{controladorUsuario.usuario.senha}" required="true"/>
+                            <h:inputSecret id="senha" value="#{controladorCadastro.usuario.senha}" required="true"/>
                             <label for="senha">Senha</label>
                         </div>
                         <div class="file-field input-field">
                             <div class="btn">
                                 <span>Foto</span>
-                                <h:inputFile id="foto" value="#{controladorUsuario.foto}" label="Foto" required="true" />
+                                <h:inputFile id="foto" value="#{controladorCadastro.foto}" label="Foto" required="true" />
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" />
@@ -51,7 +51,7 @@
                             <div class="col l6">
                                 <h:commandButton value="Salvar" 
                                                  class="waves-effect waves-light btn" 
-                                                 action="#{controladorUsuario.cadastrar()}" />
+                                                 action="#{controladorCadastro.cadastrar()}" />
                             </div>
                             <div class="col l6">
                                 <button type="button" class="waves-effect waves-light btn cancel">

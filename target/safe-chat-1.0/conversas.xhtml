@@ -2,26 +2,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
     <ui:composition template="/template.xhtml">
         <ui:define name="corpo">
+            <center><h5>Conversas</h5></center>
             <div class="row">
+                <div class="col l4 offset-l4 col s12">
                 <ul class="collection">
-                    <h:dataTable value="#{controladorConversas.getMensagensDescrip()}" var="mensagem">
+                    <h:dataTable value="#{controladorConversas.getConversas()}" var="conversa">
                         <h:column>
-                            <li class="collection-item avatar">
-                            <h:graphicImage value="data:image/jpeg;base64,#{mensagem.remetente.fotoBase64()}" class="circle"/>
-                            <span class="title" style="font-weight: bold">#{mensagem.remetente.username}</span>
-                            <p>#{mensagem.corpoPlano}</p>
-                            <a href="conversa.xhtml" class="secondary-content waves-effect">>
-                                <i class="medium material-icons indigo-text">navigate_next</i>
-                            </a>
-                        </li>
+                            <li class="collection-item avatar" 
+                                jsf:rendered="#{conversa.remetente.email != sessionScope.usuario.email}">
+                                <h:graphicImage value="data:image/jpeg;base64,#{conversa.remetente.fotoBase64()}" class="circle"/>
+                                <span class="title" style="font-weight: bold">#{conversa.remetente.username}</span>
+                                <h:form>
+                                    <h:commandLink
+                                        action="#{controladorConversa.abrirConversa(conversa.remetente)}">
+                                        <i class="medium material-icons indigo-text">navigate_next</i>
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                            <li class="collection-item avatar" 
+                                jsf:rendered="#{conversa.destino.email != sessionScope.usuario.email}">
+                                <h:graphicImage value="data:image/jpeg;base64,#{conversa.destino.fotoBase64()}" class="circle"/>
+                                <span class="title" style="font-weight: bold">#{conversa.destino.username}</span>
+                                <h:form>
+                                    <h:commandLink
+                                        action="#{controladorConversa.abrirConversa(conversa.destino)}">
+                                        <i class="medium material-icons indigo-text">navigate_next</i>
+                                    </h:commandLink>
+                                </h:form>
+                            </li>
+                            
                         </h:column>
                         
                     </h:dataTable>
                 </ul>
+                </div>
             </div>
+                
         </ui:define>
     </ui:composition>
 </html>
