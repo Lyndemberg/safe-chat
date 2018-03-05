@@ -22,7 +22,7 @@ import org.bson.types.Binary;
 @Stateless
 @Local(PrivateKeyDao.class)
 public class PrivateKeyDaoImpl implements PrivateKeyDao {
-    private static final MongoClient cliente = new MongoClient("localhost",27017);
+    private static final MongoClient cliente = new MongoClient("host-mongo",27017);
     private static final MongoDatabase banco = cliente.getDatabase("banco");
     private static final MongoCollection<Document> colecao = banco.getCollection("keys");
 

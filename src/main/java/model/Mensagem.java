@@ -26,9 +26,9 @@ public class Mensagem implements Serializable{
     @Convert(converter = LocalDateTimeToStamp.class)
     private LocalDateTime hora;
     @Lob
-    private byte[] corpoRemetente;
+    private byte[] corpoUser1;
     @Lob
-    private byte[] corpoDestino;
+    private byte[] corpoUser2;
     @Transient
     private String corpoPlano;
     @OneToOne
@@ -39,14 +39,13 @@ public class Mensagem implements Serializable{
         
     }
 
-    public Mensagem(LocalDateTime hora, byte[] corpoRemetente, byte[] corpoDestino, Usuario remetente, Usuario destino) {
+    public Mensagem(LocalDateTime hora, byte[] corpoUser1, byte[] corpoUser2, Usuario remetente, Usuario destino) {
         this.hora = hora;
-        this.corpoRemetente = corpoRemetente;
-        this.corpoDestino = corpoDestino;
+        this.corpoUser1 = corpoUser1;
+        this.corpoUser2 = corpoUser2;
         this.remetente = remetente;
         this.destino = destino;
     }
-
 
     public int getId() {
         return id;
@@ -64,20 +63,20 @@ public class Mensagem implements Serializable{
         this.hora = hora;
     }
 
-    public byte[] getCorpoRemetente() {
-        return corpoRemetente;
+    public byte[] getCorpoUser1() {
+        return corpoUser1;
     }
 
-    public void setCorpoRemetente(byte[] corpoRemetente) {
-        this.corpoRemetente = corpoRemetente;
+    public void setCorpoUser1(byte[] corpoUser1) {
+        this.corpoUser1 = corpoUser1;
     }
 
-    public byte[] getCorpoDestino() {
-        return corpoDestino;
+    public byte[] getCorpoUser2() {
+        return corpoUser2;
     }
 
-    public void setCorpoDestino(byte[] corpoDestino) {
-        this.corpoDestino = corpoDestino;
+    public void setCorpoUser2(byte[] corpoUser2) {
+        this.corpoUser2 = corpoUser2;
     }
 
     public String getCorpoPlano() {
@@ -104,6 +103,8 @@ public class Mensagem implements Serializable{
         this.destino = destino;
     }
 
+
+   
     public String horaFormatada(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return hora.format(formatter);

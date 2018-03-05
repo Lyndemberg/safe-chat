@@ -19,9 +19,7 @@
             <nav class="indigo">
                 <div class="nav-wrapper">
                     <a class="brand-logo center">
-                        <h:graphicImage value="data:image/jpeg;base64,#{controladorConversa.destino.fotoBase64()}" 
-                                            class="circle" height="50px"/>
-                        #{controladorConversa.destino.username}
+                        <span style="font-weight: bolder">@</span>#{controladorConversa.destino.username}
                     </a>
                     
                     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -51,23 +49,34 @@
             </li>
         </ul>
         <div class="row">
-            <div class="col l12 col s12" style="overflow: auto;">
+            <div class="col l12 s12 " style="overflow: scroll;">
                 <ul class="collection" style="border:none">
                     <h:dataTable value="#{controladorConversa.msgsDescriptografadas()}" var="mensagem">
                         <h:column>
-                            <li class="collection-item avatar" style="border:none; margin:0px" 
-                                jsf:rendered="#{mensagem.remetente.email != sessionScope.usuario.email}">
-                                <h:graphicImage value="data:image/jpeg;base64,#{mensagem.remetente.fotoBase64()}" 
-                                            class="circle"/>
-                                <span class="chip" style="font-size:12pt">#{mensagem.corpoPlano}</span>
-                                <span>${mensagem.horaFormatada()}</span>
-                            </li>
-                            <li class="collection-item avatar right" style="border:none; margin:0px"
-                                jsf:rendered="#{mensagem.remetente.email == sessionScope.usuario.email}">                        
-                                <span class="chip" style="font-size:12pt">#{mensagem.corpoPlano}</span>
-                                <span>${mensagem.horaFormatada()}</span>
+                            <div  jsf:rendered="#{mensagem.remetente.email != sessionScope.usuario.email}">
+                                    <div class="row valign-wrapper">
+                                        <div class="col s3 l1">
+                                            <h:graphicImage value="data:image/jpeg;base64,#{mensagem.remetente.fotoBase64()}" 
+                                            class="circle responsive-img"/>
+                                        </div>
+                                        <div class="col s9 l11 grey lighten-3">
+                                            <span style="font-weight: bolder; font-size:13pt">#{mensagem.corpoPlano}</span><br/>
+                                            <span style="font-size:9pt">${mensagem.horaFormatada()}</span>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div jsf:rendered="#{mensagem.remetente.email == sessionScope.usuario.email}">                        
                                 
-                            </li>
+                                    <div class="row valign-wrapper right">
+                                        <div class="col s12 l12 grey lighten-3">
+                                            <span style="font-weight: bolder;font-size:13pt">#{mensagem.corpoPlano}</span><br/>
+                                            <span style="font-size:9pt">${mensagem.horaFormatada()}</span>
+                                        </div>
+                                    </div>
+                                    
+                                
+                                
+                            </div>
                         </h:column>
                     </h:dataTable>
                 </ul>
@@ -75,12 +84,13 @@
         </div>
         
         <div class="row">
-            <div class="col l12 col s12 grey lighten-4" style="bottom:0;position:fixed;">
+            <div class="col l12 s12 grey lighten-4" style="bottom:0;position:fixed; z-index: 2">
                 <hr/>   
                 <h:form>
                     <div class="input-field col s9 l11">
-                        <input jsf:value="#{controladorConversa.mensagem}" id="textarea1" class="materialize-textarea"/>
-                        <label for="textarea1" class='active'>Mensagem</label>
+                        <h:inputText value="#{controladorConversa.mensagem}" id="mensagem" required="true"/>
+                        
+                        <label for="mensagem" class='active'>Mensagem</label>
                     </div>
                     <div class="col s3 l1">
                         <br/>

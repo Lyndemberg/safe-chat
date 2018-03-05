@@ -29,7 +29,7 @@
                         <li class="collection-item avatar">
                             <h:graphicImage value="data:image/jpeg;base64,#{controladorBusca.destino.fotoBase64()}" class="circle"/>
                             <span class="title" style="font-weight: bold">#{controladorBusca.destino.username}</span>
-                            <h:form>
+                            <h:form class="right waves-effect">
                                 <h:commandLink action="#{controladorConversa.abrirConversa(controladorBusca.destino)}">
                                     <i class="medium material-icons indigo-text">navigate_next</i>
                                 </h:commandLink>

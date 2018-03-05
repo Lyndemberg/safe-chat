@@ -4,6 +4,7 @@ import interfaces.ConversaDao;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -21,23 +22,26 @@ public class ControladorConversa implements Serializable{
     private String mensagem;
     @EJB
     private ConversaDao conversaDao;
+    private Usuario logado;
+    @PostConstruct
+    public void init(){
+        HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        logado = (Usuario) sessao.getAttribute("usuario");
+    }
     
     public List<Mensagem> msgsDescriptografadas() throws Exception{
-        HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        Usuario logado = (Usuario) sessao.getAttribute("usuario");
         Conversa conversa = conversaDao.getConversa(logado, destino);
-        
         if(conversa != null){
             List<Mensagem> msgs = conversa.getMensagens();
-            if(conversa.getRemetente().getEmail().equals(logado.getEmail())){
+            if(conversa.getUser1().getEmail().equals(logado.getEmail())){
                 for(Mensagem m : msgs){
-                    String descrip = new String(CryptoSafeChat.descriptografar(m.getCorpoRemetente(), 
+                    String descrip = new String(CryptoSafeChat.descriptografar(m.getCorpoUser1(), 
                             logado.getChavePrivada()));
                     m.setCorpoPlano(descrip);
                 }
             }else{
                 for(Mensagem m : msgs){
-                    String descrip = new String(CryptoSafeChat.descriptografar(m.getCorpoDestino(), 
+                    String descrip = new String(CryptoSafeChat.descriptografar(m.getCorpoUser2(), 
                             logado.getChavePrivada()));
                     m.setCorpoPlano(descrip);
                 }
@@ -49,27 +53,26 @@ public class ControladorConversa implements Serializable{
     
     
     public String enviarMensagem() throws Exception{
-        HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        Usuario logado = (Usuario) sessao.getAttribute("usuario");        
         Conversa conversa = conversaDao.getConversa(logado, destino);
-        if(conversa != null){
-            byte[] corpoRemetente;
-            byte[] corpoDestino;
-            if(conversa.getRemetente().getEmail().equals(logado.getEmail())){
-                corpoRemetente = CryptoSafeChat.criptografar(mensagem.getBytes(), logado.getChavePublica());
-                corpoDestino = CryptoSafeChat.criptografar(mensagem.getBytes(), conversa.getDestino().getChavePublica());
+        Mensagem nova;
+        byte[] corpoUser1;
+        byte[] corpoUser2;
+        if(conversa != null){    
+            if(conversa.getUser1().getEmail().equals(logado.getEmail())){
+                corpoUser1 = CryptoSafeChat.criptografar(mensagem.getBytes(), logado.getChavePublica());
+                corpoUser2 = CryptoSafeChat.criptografar(mensagem.getBytes(), conversa.getUser2().getChavePublica());
             }else{
-                corpoDestino = CryptoSafeChat.criptografar(mensagem.getBytes(), logado.getChavePublica());
-                corpoRemetente = CryptoSafeChat.criptografar(mensagem.getBytes(), conversa.getRemetente().getChavePublica());
+                corpoUser2 = CryptoSafeChat.criptografar(mensagem.getBytes(), logado.getChavePublica());
+                corpoUser1 = CryptoSafeChat.criptografar(mensagem.getBytes(), conversa.getUser1().getChavePublica());
             }
-            Mensagem nova = new Mensagem(LocalDateTime.now(),corpoRemetente, corpoDestino,logado,destino);
+            nova = new Mensagem(LocalDateTime.now(),corpoUser1, corpoUser2,logado,destino);
             conversa.addMensagem(nova);
             conversaDao.atualizar(conversa);
         }else{
             Conversa novaConversa = new Conversa(logado, destino);
-            byte[] corpoRemetente = CryptoSafeChat.criptografar(mensagem.getBytes(), logado.getChavePublica());
-            byte[] corpoDestino = CryptoSafeChat.criptografar(mensagem.getBytes(), destino.getChavePublica());
-            Mensagem nova = new Mensagem(LocalDateTime.now(),corpoRemetente, corpoDestino,logado,destino);
+            corpoUser1 = CryptoSafeChat.criptografar(mensagem.getBytes(), logado.getChavePublica());
+            corpoUser2 = CryptoSafeChat.criptografar(mensagem.getBytes(), destino.getChavePublica());
+            nova = new Mensagem(LocalDateTime.now(),corpoUser1, corpoUser2,logado,destino);
             novaConversa.addMensagem(nova);
             conversaDao.salvar(novaConversa);
         }   
@@ -78,10 +81,8 @@ public class ControladorConversa implements Serializable{
     }
 
     public String abrirConversa(Usuario u){
-        HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        Usuario logado = (Usuario) sessao.getAttribute("usuario");        
         destino = u;
-        return "conversa.xhtml";
+        return "conversa.xhtml?faces-redirect=true";
     }
 
     public String getMensagem() {

@@ -20,9 +20,9 @@ public class Conversa implements Serializable{
     @GeneratedValue
     private int id;
     @OneToOne
-    private Usuario remetente;
+    private Usuario user1;
     @OneToOne
-    private Usuario destino;
+    private Usuario user2;
     @OneToMany
     @Basic(fetch = FetchType.LAZY)
     private List<Mensagem> mensagens;
@@ -31,9 +31,9 @@ public class Conversa implements Serializable{
         mensagens = new ArrayList<>();
     }
 
-    public Conversa(Usuario remetente, Usuario destino) {
-        this.remetente = remetente;
-        this.destino = destino;
+    public Conversa(Usuario user1, Usuario user2) {
+        this.user1 = user1;
+        this.user2 = user2;
         mensagens = new ArrayList<>();
     }
 
@@ -41,13 +41,6 @@ public class Conversa implements Serializable{
         mensagens.add(nova);
     }
 
-    public Usuario getDestino() {
-        return destino;
-    }
-
-    public void setDestino(Usuario destino) {
-        this.destino = destino;
-    }
     public int getId() {
         return id;
     }
@@ -56,12 +49,20 @@ public class Conversa implements Serializable{
         this.id = id;
     }
 
-    public Usuario getRemetente() {
-        return remetente;
+    public Usuario getUser1() {
+        return user1;
     }
 
-    public void setRemetente(Usuario remetente) {
-        this.remetente = remetente;
+    public void setUser1(Usuario user1) {
+        this.user1 = user1;
+    }
+
+    public Usuario getUser2() {
+        return user2;
+    }
+
+    public void setUser2(Usuario user2) {
+        this.user2 = user2;
     }
 
     public List<Mensagem> getMensagens() {
@@ -71,6 +72,7 @@ public class Conversa implements Serializable{
     public void setMensagens(List<Mensagem> mensagens) {
         this.mensagens = mensagens;
     }
+
     
     
     

@@ -35,6 +35,17 @@
             </nav>
         </div>    
         <ul class="side-nav" id="mobile-demo">
+            <li>
+                <div class="user-view">
+                    <div class="background indigo">
+                    </div>
+                    <a href="#!">
+                        <h:graphicImage value="data:image/jpeg;base64,#{sessionScope.usuario.fotoBase64()}" class="circle"/>
+                    </a>
+                    <a href="#!"><span class="white-text name">#{sessionScope.usuario.username}</span></a>
+                    <a href="#!"><span class="white-text email">#{sessionScope.usuario.email}</span></a>
+                </div>
+            </li>
             <li><a href="busca.xhtml"><i class="material-icons left">search</i>Busca</a></li>
             <li><a href="conversas.xhtml"><i class="material-icons left">chat</i>Conversas</a></li>
             <li>
