@@ -15,7 +15,7 @@ public interface UsuarioDao {
 
     void atualizar(Usuario atualizado);
 
-    Usuario autentica(String email, String senha);
+    Usuario autentica(String email, byte[] senha);
 
     Usuario buscarPorUsername(String username);
 

@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import interfaces.PrivateKeyDao;
 import interfaces.UsuarioDao;
+import util.Md5;
 
 /**
  *
@@ -25,6 +26,7 @@ public class ControladorUsuario implements Serializable{
     private UsuarioDao usuarioDao;
     @EJB 
     private PrivateKeyDao privateKeyDao;
+    private String senha;
     
     public String logar() throws Exception{
         Usuario u = usuarioDao.lerPorEmail(usuario.getEmail());
@@ -32,7 +34,7 @@ public class ControladorUsuario implements Serializable{
             mostrarMsg("Login","Usuário não cadastrado");
             return null;
         }else{
-            Usuario autentica = usuarioDao.autentica(usuario.getEmail(), usuario.getSenha());
+            Usuario autentica = usuarioDao.autentica(usuario.getEmail(), Md5.toMd5(senha));
             if(autentica == null){
                 mostrarMsg("Login","Dados incorretos");
                 return null;   
@@ -57,6 +59,14 @@ public class ControladorUsuario implements Serializable{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     
     private void mostrarMsg(String titulo, String corpo){

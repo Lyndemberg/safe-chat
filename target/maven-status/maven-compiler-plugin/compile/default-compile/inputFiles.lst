@@ -14,4 +14,5 @@
 /home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/conversors/LocalDateTimeToStamp.java
 /home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/interfaces/ConversaDao.java
 /home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/util/CryptoSafeChat.java
+/home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/util/Md5.java
 /home/lyndemberg/NetBeansProjects/safe-chat/src/main/java/controllers/ControladorCadastro.java

@@ -12,6 +12,7 @@ model/Conversa.class
 controllers/ControladorUsuario.class
 model/Usuario_.class
 interfaces/PrivateKeyDao.class
+util/Md5.class
 filters/FiltroSessao.class
 interfaces/UsuarioDao.class
 dao/ConversaDaoImpl.class

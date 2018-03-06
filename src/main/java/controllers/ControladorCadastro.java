@@ -18,6 +18,8 @@ import model.Usuario;
 import util.CryptoSafeChat;
 import interfaces.PrivateKeyDao;
 import interfaces.UsuarioDao;
+import java.security.MessageDigest;
+import util.Md5;
 
 /**
  *
@@ -32,7 +34,7 @@ public class ControladorCadastro {
     private UsuarioDao usuarioDao;
     @EJB 
     private PrivateKeyDao privateKeyDao;
-    
+    private String senha;
     public String cadastrar(){
         if(usuarioDao.buscarPorUsername(usuario.getUsername()) != null){
             mostrarMsg("Cadastro", "Já existe um usuário com esse username");
@@ -54,6 +56,8 @@ public class ControladorCadastro {
                 
                 //salvando private key no mongo
                 privateKeyDao.save(usuario.getEmail(), privada);
+                
+                usuario.setSenha(Md5.toMd5(senha));;
                 
                 usuarioDao.salvar(usuario);
             } catch (NoSuchAlgorithmException ex) {
@@ -79,6 +83,14 @@ public class ControladorCadastro {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     
     private void mostrarMsg(String titulo, String corpo){

@@ -56,7 +56,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
         }
     }
     @Override
-    public Usuario autentica(String email, String senha){
+    public Usuario autentica(String email, byte[] senha){
         TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email AND u.senha=:senha", Usuario.class);
         query.setParameter("email", email);
         query.setParameter("senha", senha);

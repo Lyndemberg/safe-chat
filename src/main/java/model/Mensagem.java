@@ -104,9 +104,8 @@ public class Mensagem implements Serializable{
     }
 
 
-   
     public String horaFormatada(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return hora.format(formatter);
     }
     

@@ -32,7 +32,9 @@ public class Usuario implements Serializable{
     
     @Column(unique = true)
     private String email;
-    private String senha;
+    
+    @Lob
+    private byte[] senha;
     
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -49,7 +51,7 @@ public class Usuario implements Serializable{
     }
 
     
-    public Usuario(String username, String email, String senha, byte[] foto) {
+    public Usuario(String username, String email, byte[] senha, byte[] foto) {
         this.username = username;
         this.email = email;
         this.senha = senha;
@@ -73,11 +75,11 @@ public class Usuario implements Serializable{
         this.email = email;
     }
 
-    public String getSenha() {
+    public byte[] getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(byte[] senha) {
         this.senha = senha;
     }
 
